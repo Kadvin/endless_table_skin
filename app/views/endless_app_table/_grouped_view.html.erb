@@ -1,0 +1,18 @@
+<% if key = records.key_by_hash( current_group )%>
+  <% sub_records = records.delete(key) %>
+  <%= render :partial=>"/endless_app_table/container_record", :collection => sub_records, :as=> :record,:locals=>{:sortby=>sortby} %>
+<% end %>
+
+<% records.each do |group, sub_records| %>
+  <tr class="expanded group" name="<%=group.hash%>">
+    <td class="control" width="5%">
+      <%if app_table_config.selection_type == "checkbox"%>
+      <input type="checkbox" class="group_selection" value="<%=group.hash%>"/>
+      <%end%>
+    </td>
+    <td class="name" colspan="<%=app_table_config.columns.size %> ">
+      <span class="name"><%= group || "未设置" %></span>
+    </td>
+  </tr>
+  <%= render :partial=>"/endless_app_table/container_record", :collection => sub_records, :as=> :record , :locals=>{:sortby=>sortby}%>
+<% end %>

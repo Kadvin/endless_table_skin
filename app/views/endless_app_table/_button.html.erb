@@ -1,0 +1,20 @@
+<%more = !button.sub_buttons.empty?%>
+<td class="tool_button" <%="onMouseOver='Endless.ToolButton.showMore(this)'" if more%> >
+  <%content_tag :button, button.merge(:id=>"endless_button_#{button.name}") do%>
+   <img class="image" src="<%= button.image %>" alt="<%=button.name%>" />
+   <span class="text"><%= button.label %></span>
+  <%end%>
+  <%if more -%>
+  <img class="more" src="/s.gif" alt="more" />
+  <ul class="more" style="display:none" onMouseOut="Endless.ToolButton.hideMore(this)">
+    <%button.sub_buttons.each do |child| -%>
+     <li>
+       <%content_tag :button, child do%>
+         <img class="image" src="<%= child.image %>" alt="<%=child.name%>"/>
+         <span class="text"><%= child.label %></span>
+       <%end%>
+     </li>
+    <%end%>
+  </ul>
+  <%end%>
+</td>

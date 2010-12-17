@@ -1,0 +1,11 @@
+<tr class="<%= cycle("even", "odd") -%> row" id="<%=record.class.to_s + record.id.to_s%>">
+  <td style="width: 5%;">
+    <input name="<%= app_table_config.model_id %>_selection" type="<%=app_table_config.selection_type%>" class="selection" value="<%=app_table_selection_of(record)%>"/>
+  </td>
+  <% app_table_config.columns.each do |col|
+    klasses = []
+    klasses << "grouped" if col.name.to_s == sortby.first && col.groupby
+  %>
+    <td style="width: <%=  col.width %>" class="<%=klasses.join(' ')%>"><%= app_table_column_value(record,col)%></td>
+  <% end %>
+</tr>

@@ -1,0 +1,132 @@
+div.endless{
+  text-align: left;
+}
+div.endless td{
+  font-size: 12px;
+}
+.endless ul.toolbar,
+.endless ul.statusbar{
+  margin:0;
+  padding: 10px;
+  list-style-type:none;
+  width:100%;
+}
+.endless ul.toolbar li,
+.endless ul.statusbar li{
+  display: inline-table
+}
+.endless table.fixed_header,
+.endless div.scroll_container,
+.endless table.scrollable_body,
+.endless table.statusbar{
+  width: 100%;
+}
+.endless div.scroll_container{
+  height: 300px;
+  overflow-y: scroll;
+  overflow-x: none;
+}
+.endless_table th{
+  text-align: left;
+  font-size: 13px;
+  color:black;
+  vertical-align: middle;
+  padding: 5px 0px;
+}
+.endless_table th.sortable{
+  color:blue;
+  background: no-repeat left center;
+}
+.endless_table th.sortable span{
+  cursor: pointer;
+}
+.endless_table th.asc{
+  background-image: url(/images/endless_page/up.gif);
+  padding-left: 15px;
+}
+.endless_table th.desc{
+  background-image: url(/images/endless_page/down.gif);
+  padding-left: 15px;
+}
+
+.endless_table .odd, div.endless_table .even{
+    height: 20px;
+}
+.endless_table tr.even{
+  background-color: #f6f6f6;
+}
+.endless_table tr.odd{
+}
+.endless_table tr.selected{
+  background-color: #99ff99;
+}
+
+.endless_table td{
+  border-bottom:1px solid #EEEEEE;
+}
+.endless_table tr.group{
+  background-color: #ccc;
+  cursor: pointer;
+  background-repeat: no-repeat;
+  background-position: right center;
+}
+.endless_table tr.group span.name{
+  font-weight: bold;
+  color: #3333ff;
+}
+.endless_table tr td.name{
+  background-repeat: no-repeat;
+  background-position: right center;
+}
+.endless_table tr.expanded td.name{
+  background-image: url(/images/endless_page/shrink.png);
+}
+.endless_table tr.shrink td.name{
+  background-image: url(/images/endless_page/expand.png);
+}
+.endless table.toolbar td.tool_button{
+  padding : 0 10px;
+}
+.endless table.toolbar td.tool_button button{
+  cursor: pointer;
+  background: transparent;
+  border: none;
+}
+.endless table.toolbar td.tool_button span.text{
+  margin-bottom: 4px;  
+  font-size: 12px;
+  font-weight:700;
+}
+.endless table.toolbar td.enabled span.text{
+  color : #000000;
+}
+.endless table.toolbar td.disabled span.text{
+  color : #cccccc;
+}
+.endless table.scrollable_body td.grouped{
+  color : #A3A3A3;
+}
+
+.endless table.toolbar img.more{
+   background-image: url("/images/endless_page/more.png");
+   background-repeat: no-repeat;
+   width: 15px;
+}
+.endless table.toolbar ul.more{
+   border: 1px solid #98B1C4;
+   position: absolute;
+   z-index: 100;
+   list-style: none;
+   margin: 0;
+   padding: 5px;
+   background-color: #F3F3F3;
+}
+.endless table.toolbar ul.more li{
+   clear: left;
+   float:left;
+   line-height:20px;
+   margin:0;
+   padding:0;
+   position:relative;
+   z-index:1;
+}

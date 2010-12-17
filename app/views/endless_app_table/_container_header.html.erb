@@ -1,0 +1,16 @@
+<table class="fixed_header">
+  <thead>
+    <tr>
+      <th class="selection" style="width: 5%;"></th>
+      <% app_table_config.columns.each do |column| -%>
+        <%  klasses = []
+        klasses << "sortable" if column.sortable
+        klasses << sortby.last.downcase if sortby.first && sortby.first.downcase == column.name.to_s.downcase
+      %>
+        <th class="<%= klasses.join(" ") %>" name="<%=column.name%>" width="<%=column.width %> ">
+          <span><%= column.label %></span>
+        </th>
+      <% end -%>
+    </tr>
+  </thead>
+</table>

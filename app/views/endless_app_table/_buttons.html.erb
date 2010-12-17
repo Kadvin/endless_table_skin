@@ -1,0 +1,11 @@
+<div class="toolbar_container">
+  <table class="toolbar">
+    <tbody>
+      <tr>
+        <% app_table_config.buttons.each do |button| %>
+          <%= render :partial => "/endless_app_table/button", :locals=>{:button => button}  %>
+        <% end %>
+      </tr>
+    </tbody>
+  </table>
+</div>
