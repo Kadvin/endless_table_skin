@@ -33,9 +33,9 @@ Endless.Page = Class.create({
     }
 
    //初始化组成对象
-    var domToolbar = this.element.select("table.toolbar").reduce();
-    var domTable = this.element.select("div.endless_table").reduce();
-    var domStatusbar = this.element.select("table.statusbar").reduce();
+    var domToolbar = this.element.select("table.toolbar").first();
+    var domTable = this.element.select("div.endless_table").first();
+    var domStatusbar = this.element.select("table.statusbar").first();
     this.toolbar = new Endless.Toolbar(this, domToolbar);
     this.table = new Endless.Table(this, domTable);
     this.statusbar = new Endless.Statusbar(this, domStatusbar);
@@ -178,7 +178,7 @@ Object.extend(Endless.Page, {
    */
   create : function(){
     try{
-      var element = $$("div.endless").reduce();
+      var element = $$("div.endless").first();
       this.page = new Endless.Page(element);
       Endless.Page['instance'] = this.page;
     }catch(error){
@@ -201,8 +201,8 @@ Endless.Table = Class.create({
     this.page = page;
     this.element = $(element);
     // 根据HTML初始化对应的dom成员
-    this.tbody = this.element.select("table.scrollable_body tbody").reduce();
-    this.container = this.element.select("div.scroll_container").reduce();
+    this.tbody = this.element.select("table.scrollable_body tbody").first();
+    this.container = this.element.select("div.scroll_container").first();
     //初始化Group Model
     this.groupModel = new Endless.GroupModel(this);
     //初始化Column Model
@@ -448,7 +448,7 @@ Endless.ColumnHeader = Class.create({
     this.name = this.element.readAttribute("name");
     if (this.element.hasClassName("sortable")) {
       this.sortable = true;
-      var span = this.element.select("span").reduce();
+      var span = this.element.select("span").first();
       span.observe('click', this.onColumnClick.bindAsEventListener(this))
     }
     if (this.element.hasClassName("asc")) {
@@ -537,7 +537,7 @@ Endless.SelectionModel = Class.create({
         return;
     }
     //找到TR之后，再向下找到相应的Input Selection
-    var input = tr.select("input.selection").reduce();
+    var input = tr.select("input.selection").first();
     //找到再模拟人工点击
     if( input != null ) {
       input.checked = !input.checked;
@@ -619,7 +619,7 @@ Endless.SingleSelectionModel = Class.create(Endless.SelectionModel, {
   },
   // Not support
   checkNone : function(){
-    var button = this.table.tbody.select("input.selection[value=" + this.selection[0] + "]").reduce();
+    var button = this.table.tbody.select("input.selection[value=" + this.selection[0] + "]").first();
     if( button ) button.checked = false;
     this.selection.length = 0;
     this.table.page.fire('selectionChanged', this.selection)
@@ -638,7 +638,7 @@ Endless.SingleSelectionModel = Class.create(Endless.SelectionModel, {
       tr.removeClassName("selected")
     }
     $$("table.scrollable_body tr.row").each(function(tr){
-      var field = $$("#" + tr.id+ " input.selection").reduce();
+      var field = $$("#" + tr.id+ " input.selection").first();
       field.checked ? tr.addClassName("selected") : tr.removeClassName("selected");
     })
     this.table.page.fire('selectionChanged', this.selection)
@@ -659,7 +659,7 @@ Endless.Toolbar = Class.create({
     this.buttons = [];
     var toolbar = this;
     this.element.select("td.tool_button button").each(function(td){
-      toolbar.buttons.push(new Endless.ToolButton(toolbar, td))
+      toolbar.buttons.push(new Endless.Button(toolbar, td))
     });
   },
 
@@ -670,7 +670,7 @@ Endless.Toolbar = Class.create({
   }
 })
 
-Endless.ToolButton = Class.create({
+Endless.Button = Class.create({
   initialize: function(toolbar, element) {
     this.toolbar = toolbar;
     this.element = $(element);
@@ -692,9 +692,9 @@ Endless.ToolButton = Class.create({
     this.element.setAttribute("disabled","true");
   }
 })
-//ToolButton的静态方法
+//Button的静态方法
 //提供CRUD四种按钮的对应选择调节/事件激活逻辑
-Object.extend(Endless.ToolButton, {
+Object.extend(Endless.Button, {
   adjustForOne : function(source, event){
     var selection = event.memo;
     selection.size() == 1 ? source.enable() : source.disable();
@@ -707,7 +707,7 @@ Object.extend(Endless.ToolButton, {
     window.location.href = button.readAttribute("url");
   },
   activateNew : function(button){
-    Endless.ToolButton.activate(button);
+    Endless.Button.activate(button);
   },
   activateRefresh : function(button){
     Endless.Page.getInstance().reload();
@@ -751,11 +751,11 @@ Object.extend(Endless.ToolButton, {
     if( !confirm( promotion ) ){
       return
     }else{
-      Endless.ToolButton.activateBatch(button, 'delete');
+      Endless.Button.activateBatch(button, 'delete');
     }
   },
   showMore : function(td){
-    var ul = $(td).select("ul.more").reduce();
+    var ul = $(td).select("ul.more").first();
     if(ul != null) ul.show();
   },
   hideMore : function(ul){
@@ -792,8 +792,8 @@ Endless.Groupbar = Class.create({
   initialize: function(table, element){
     this.table = table;
     this.element = $(element);
-    this.nameCell =  this.element.select("td.name").reduce();
-    this.inputControl = this.element.select("td.control input.group_selection").reduce();
+    this.nameCell =  this.element.select("td.name").first();
+    this.inputControl = this.element.select("td.control input.group_selection").first();
     this.name = this.element.readAttribute("name");
     this.expanded = true;//照理来说，后台可以控制分组内的内容默认是显示还是不显示，而后这里是根据后台的控制结果来决定初始状态
     this.nameCell.observe('click', this.onNameClick.bindAsEventListener(this));
@@ -852,7 +852,7 @@ Endless.Groupbar = Class.create({
         return
       }
       if( flag && tr.hasClassName("row")) {
-        var input = tr.select("td input.selection").reduce();
+        var input = tr.select("td input.selection").first();
         result.push(input);
       }
     })

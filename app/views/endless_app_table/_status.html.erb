@@ -1,0 +1,19 @@
+<table class="statusbar">
+  <tbody>
+    <tr>
+        <td name="left" class="status_item">
+          <%if app_table_config.selection_mode.to_sym == :multiple %>
+          选择:
+          <a href="javascript:Endless.Page.instance.checkAll();">所有</a>
+          <a href="javascript:Endless.Page.instance.checkNone();">取消所选</a>
+          <%end%>
+        </td>
+        <td name="middle" class="status_item" onSelectionChanged = "Endless.StatusItem.updateSelection(source, event)" >
+          &nbsp;
+        </td>
+        <td name="right" class="status_item" onFetchSuccess="Endless.StatusItem.updateSummary(source, event)" align="right">
+          &nbsp;
+        </td>
+    </tr>
+  </tbody>
+</table>
