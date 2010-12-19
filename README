@@ -1,13 +1,15 @@
 Endless Table Skin
 ================
 
-Introduction goes here.
+A skin of app_table to display the records in endelss mode like google reader does.
 
 
 Example
 =======
 
-Example goes here.
+class TopicsController < ApplicationController
+  browse_as_table :topics, :skin => :endless # its the app_table's default behavior
+end
 
 
 Copyright (c) 2010 Kadvin, released under the MIT license
